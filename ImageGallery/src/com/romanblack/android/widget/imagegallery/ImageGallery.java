@@ -335,6 +335,20 @@ public class ImageGallery extends AbsoluteLayout{
     }
 
     @Override
+    protected void onDetachedFromWindow() {
+        //Log.d("", "");
+        
+        try{
+            executorService.shutdown();
+            executorService = null;
+            System.gc();
+        }catch(NullPointerException nPEx){
+        }
+        
+        super.onDetachedFromWindow();
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!touchEnabled){
             return false;
